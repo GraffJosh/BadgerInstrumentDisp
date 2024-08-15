@@ -86,7 +86,7 @@ class MQTTData:
 
     async def getDisplayUpdate(self):
         async with self.updateLock:
-            retUp   date = self.requestUpdateDi    s self.requestUpdateDisplay          return retUpdate
+            return self.requestUpdateDisplay
 
     def getTopics(self):
         return list(self.data.keys())
@@ -166,7 +166,7 @@ class MQTTData:
         # await asyncio.sleep(5)
         # print("publish", self.message_count)
         # If WiFi is down the following will pause for the duration.
-        await self.client.publish(self.TOPIC, "{}".format(self.message_count), qos=1)
+        await self.client.publish(self.TOPIC, "Control Topic:{} {}".format(self.control_topic,self.message_count), qos=1)
         self.message_count += 1
 
     async def update_display(self):
